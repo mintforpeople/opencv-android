@@ -1,8 +1,13 @@
 # opencv-android
+
+
+> **Update**: OpenCV v4.2.0 and v4.3.0 (with and without contribution packages) are also now available. 
+
 Easy way to integrate OpenCv into your Android project via Gradle.  
 **No NDK dependency needed** - just include this library and you are good to go.  
   
-  
+Disclamer: 
+The GitHub project is *not* (yet) intended to be used as module dependency.  
 Include one of this dependencies in your module's build.gradle **dependencies** section
 
 ```groovy
@@ -25,6 +30,18 @@ dependencies {
   
   // opencv 4.1.0 with contribution packages
   implementation 'com.quickbirdstudios:opencv:4.1.0-contrib'
+  
+  // opencv 4.2.0
+  implementation 'com.quickbirdstudios:opencv:4.2.0'
+  
+  // opencv 4.2.0 with contribution packages
+  implementation 'com.quickbirdstudios:opencv:4.2.0-contrib'
+  
+  // opencv 4.3.0
+  implementation 'com.quickbirdstudios:opencv:4.3.0'
+  
+  // opencv 4.3.0 with contribution packages
+  implementation 'com.quickbirdstudios:opencv:4.3.0-contrib'
 }
 ```
 
