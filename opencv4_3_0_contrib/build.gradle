@@ -98,12 +98,14 @@ println "OpenCV: " +openCVersionName + " " + project.buildscript.sourceFile
 android {
     compileSdkVersion 26
 
+
     defaultConfig {
+
         minSdkVersion 21
         targetSdkVersion 26
 
-        versionCode openCVersionCode
-        versionName openCVersionName
+        versionCode 3
+        versionName "4.3.0-my-SNAPSHOT"
 
         externalNativeBuild {
             cmake {
@@ -112,6 +114,7 @@ android {
             }
         }
     }
+
 
     buildTypes {
         debug {
@@ -128,15 +131,16 @@ android {
         }
     }
     compileOptions {
-        sourceCompatibility JavaVersion.VERSION_1_6
-        targetCompatibility JavaVersion.VERSION_1_6
+        sourceCompatibility JavaVersion.VERSION_1_7
+        targetCompatibility JavaVersion.VERSION_1_7
     }
+
 
     sourceSets {
         main {
             jniLibs.srcDirs = ['native/libs']
             java.srcDirs = ['java/src']
-            aidl.srcDirs = ['java/src']
+            aidl.srcDirs = ['java/src', 'java\\aidl', 'src\\main\\aidl']
             res.srcDirs = ['java/res']
             manifest.srcFile 'java/AndroidManifest.xml'
         }
@@ -147,7 +151,24 @@ android {
             path (project.projectDir.toString() + '/libcxx_helper/CMakeLists.txt')
         }
     }
+    buildToolsVersion '28.0.3'
+    ndkVersion '21.0.6113669'
+
 }
 
-dependencies {
+//apply from: 'https://raw.github.com/chrisbanes/gradle-mvn-push/master/gradle-mvn-push.gradle'
+apply plugin: "com.vanniktech.maven.publish"
+
+tasks.withType(Javadoc) {
+    failOnError false
+    options.addStringOption('Xdoclint:none', '-quiet')
+    options.addStringOption('encoding', 'UTF-8')
+    options.addStringOption('charSet', 'UTF-8')
+}
+afterEvaluate { project ->
+    android.libraryVariants.all { variant ->
+        tasks.androidJavadocs.doFirst {
+            classpath += files(variant.javaCompile.classpath.files)
+        }
+    }
 }
