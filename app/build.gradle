@@ -35,8 +35,8 @@ dependencies {
     testImplementation 'junit:junit:4.12'
     androidTestImplementation 'com.android.support.test:runner:1.0.2'
     androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.2'
-    //implementation ('com.mytechia:opencv:4.1.0-my'){
-    //    changing true
-    //}
-    implementation project(path: ':opencv4_3_0_contrib')
+    implementation ('com.mytechia:opencv:4.3.0.2-my-SNAPSHOT'){
+        changing true
+    }
+    //implementation project(path: ':opencv4_3_0_contrib')
 }
