@@ -1,0 +1,1 @@
+C:\Users\eden\StudioProjects\opencv-android\opencv4_12_0_contrib\build\intermediates\cxx\RelWithDebInfo\4k6c4jt2\obj\x86

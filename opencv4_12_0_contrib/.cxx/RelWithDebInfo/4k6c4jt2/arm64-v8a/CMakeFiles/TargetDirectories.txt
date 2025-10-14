@@ -1,0 +1,3 @@
+C:/Users/eden/StudioProjects/opencv-android/opencv4_12_0_contrib/.cxx/RelWithDebInfo/4k6c4jt2/arm64-v8a/CMakeFiles/opencv_jni_shared.dir
+C:/Users/eden/StudioProjects/opencv-android/opencv4_12_0_contrib/.cxx/RelWithDebInfo/4k6c4jt2/arm64-v8a/CMakeFiles/edit_cache.dir
+C:/Users/eden/StudioProjects/opencv-android/opencv4_12_0_contrib/.cxx/RelWithDebInfo/4k6c4jt2/arm64-v8a/CMakeFiles/rebuild_cache.dir
