@@ -105,12 +105,14 @@ android {
         minSdkVersion 21
         targetSdkVersion 33
 
-        versionCode 6
-        versionName "4.3.0.3-my"
+        versionCode 8
+        versionName "4.3.0.5-my"
 
         externalNativeBuild {
             cmake {
-                arguments "-DANDROID_STL=c++_shared"
+                arguments "-DANDROID_STL=c++_shared",
+                        "-DANDROID_SUPPORT_FLEXIBLE_PAGE_SIZES=ON",
+                        "-DCMAKE_SHARED_LINKER_FLAGS=-Wl,-z,max-page-size=16384"
                 targets "opencv_jni_shared"
             }
         }
@@ -170,9 +172,6 @@ android {
 
 }
 
-//apply from: 'https://raw.github.com/chrisbanes/gradle-mvn-push/master/gradle-mvn-push.gradle'
-//apply plugin: "com.vanniktech.maven.publish"
-
 tasks.withType(Javadoc) {
     failOnError false
     options.addStringOption('Xdoclint:none', '-quiet')
@@ -190,7 +189,7 @@ afterEvaluate {
                     username NEXUS_USER
                     password NEXUS_PASSWORD
                 }
-                if ("4.3.0.3-my".endsWith('-SNAPSHOT')) {
+                if ("4.3.0.5-my".endsWith('-SNAPSHOT')) {
                     url SNAPSHOT_REPOSITORY_URL
                 } else {
                     url RELEASE_REPOSITORY_URL
@@ -203,7 +202,7 @@ afterEvaluate {
                 from components.release
                 groupId "com.theroboboproject"
                 artifactId "opencv"
-                version "4.3.0.3-my"
+                version "4.3.0.5-my"
             }
         }
     }
