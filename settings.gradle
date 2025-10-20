@@ -1,7 +1,7 @@
 plugins {
     id 'org.gradle.toolchains.foojay-resolver-convention' version '0.8.0'
 }
-include ':app', ':opencv4_12_0_contrib'
-
-//include ':opencv4_1_0_contrib'
+include ':app'
+//include ':opencv4_12_0_contrib'
+include ':opencv4_3_0_contrib'
 

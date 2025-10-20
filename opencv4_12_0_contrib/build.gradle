@@ -115,7 +115,9 @@ android {
 
         externalNativeBuild {
             cmake {
-                arguments "-DANDROID_STL=c++_shared"
+                arguments "-DANDROID_STL=c++_shared",
+                        "-DANDROID_SUPPORT_FLEXIBLE_PAGE_SIZES=ON",
+                        "-DCMAKE_SHARED_LINKER_FLAGS=-Wl,-z,max-page-size=16384"
                 targets "opencv_jni_shared"
             }
         }
@@ -155,6 +157,14 @@ android {
         }
     }
 
+    publishing {
+        singleVariant("release") {
+            withSourcesJar()
+            withJavadocJar()
+        }
+    }
+
+
     externalNativeBuild {
         cmake {
             path (project.projectDir.toString() + '/libcxx_helper/CMakeLists.txt')
@@ -172,31 +182,42 @@ android {
         }
     }
 
-    publishing {
-        singleVariant('release') {
-            withSourcesJar()
-            withJavadocJar()
-        }
+    namespace 'org.opencv'
+    ndkVersion '29.0.14206865'
+
+    buildFeatures{
+        aidl true
+        buildConfig true
     }
+
 
 }
 
-publishing {
-    publications {
-        release(MavenPublication) {
-            groupId = 'org.opencv'
-            artifactId = 'opencv'
-            version = '4.12.0'
-
-            afterEvaluate {
-               from components.release
-           }
+afterEvaluate {
+    publishing {
+        repositories {
+            maven {
+                name 'LocalNexus'
+                allowInsecureProtocol = true
+                credentials {
+                    username NEXUS_USER
+                    password NEXUS_PASSWORD
+                }
+                if ("4.12.0.2-my".endsWith('-SNAPSHOT')) {
+                    url SNAPSHOT_REPOSITORY_URL
+                } else {
+                    url RELEASE_REPOSITORY_URL
+                }
+            }
         }
-    }
-    repositories {
-        maven {
-            name = 'myrepo'
-            url = "${project.buildDir}/repo"
+
+        publications {
+            library(MavenPublication) {
+                from components.release
+                groupId "com.theroboboproject"
+                artifactId "opencv"
+                version "4.12.0.2-my"
+            }
         }
     }
 }

@@ -105,8 +105,8 @@ android {
         minSdkVersion 21
         targetSdkVersion 33
 
-        versionCode 8
-        versionName "4.3.0.5-my"
+        versionCode 10
+        versionName "4.3.0.6-my"
 
         externalNativeBuild {
             cmake {
@@ -189,7 +189,7 @@ afterEvaluate {
                     username NEXUS_USER
                     password NEXUS_PASSWORD
                 }
-                if ("4.3.0.5-my".endsWith('-SNAPSHOT')) {
+                if ("4.3.0.6-my".endsWith('-SNAPSHOT')) {
                     url SNAPSHOT_REPOSITORY_URL
                 } else {
                     url RELEASE_REPOSITORY_URL
@@ -202,7 +202,7 @@ afterEvaluate {
                 from components.release
                 groupId "com.theroboboproject"
                 artifactId "opencv"
-                version "4.3.0.5-my"
+                version "4.3.0.6-my"
             }
         }
     }
